@@ -1,5 +1,18 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  box-sizing: inherit;
+  font-family: "Lato", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
 }
