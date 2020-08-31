@@ -85,7 +85,7 @@
   height: 8%;
   background: linear-gradient(#7f3608, #702e05);
   margin: 2% auto;
-  border-radius: 15px;
+  border-radius: 1.5rem;
 }
 
 .Cheese {
@@ -93,7 +93,7 @@
   height: 4.5%;
   margin: 2% auto;
   background: linear-gradient(#f4d004, #d6bb22);
-  border-radius: 20px;
+  border-radius: 2rem;
 }
 
 .Salad {
