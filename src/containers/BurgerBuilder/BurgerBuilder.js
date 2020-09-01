@@ -73,8 +73,12 @@ class BurgerBuilder extends Component {
     this.setState({ orderNow: true });
   };
 
-  removeOrderNowHander = () => {
+  removeOrderNowHandler = () => {
     this.setState({ orderNow: false });
+  };
+
+  continueOrderNowHandler = () => {
+    alert("You continue!!");
   };
 
   render() {
@@ -89,9 +93,14 @@ class BurgerBuilder extends Component {
       <Aux>
         <Modal
           show={this.state.orderNow}
-          modalClosed={this.removeOrderNowHander}
+          modalClosed={this.removeOrderNowHandler}
         >
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            purchaseCancelled={this.removeOrderNowHandler}
+            purchaseContinued={this.continueOrderNowHandler}
+            price={this.state.totalPrice}
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
