@@ -2,5 +2,12 @@
   list-style: none;
   display: flex;
   align-items: center;
+  flex-direction: column;
   height: 100%;
+}
+
+@media only screen and (min-width: 500px) {
+  .NavigationItems {
+    flex-direction: row;
+  }
 }
