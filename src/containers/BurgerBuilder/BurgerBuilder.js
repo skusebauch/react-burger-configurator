@@ -91,30 +91,6 @@ class BurgerBuilder extends Component {
 
   continueOrderNowHandler = () => {
     ////alert("You continue!!");
-    //this.setState({ loading: true });
-    //const order = {
-    //  ingredients: this.state.ingredients,
-    //  // in real project re-calculate price at server side
-    //  price: this.state.totalPrice,
-    //  customer: {
-    //    name: "Sven Kusebauch",
-    //    address: {
-    //      street: "Teststreet 1",
-    //      zipCode: "41324",
-    //      country: "Germany",
-    //    },
-    //    email: "test@test.com",
-    //  },
-    //  deliveryOptions: "fastest",
-    //};
-    //axios
-    //  .post("/orders.json", order)
-    //  .then((response) => {
-    //    this.setState({ loading: false, orderNow: false });
-    //  })
-    //  .catch((error) => {
-    //    this.setState({ loading: false, orderNow: false });
-    //  });
 
     //prepare selected ingredients for url
     const queryParams = [];
@@ -126,6 +102,8 @@ class BurgerBuilder extends Component {
         //return ["bacon=1", "cheese=1", "meat=0", "salad=1"]
       );
     }
+    queryParams.push("price=" + this.state.totalPrice);
+
     const queryString = queryParams.join("&"); //return bacon=1&cheese=1&meat=1&salad=1
     this.props.history.push({
       pathname: "/checkout",
