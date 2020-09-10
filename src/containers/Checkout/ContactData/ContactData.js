@@ -7,11 +7,63 @@ import Input from "../../../components/UI/Input/Input";
 
 class ContactData extends Component {
   state = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postalCode: "",
+    orderForm: {
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Name",
+        },
+        value: "",
+      },
+      street: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Address",
+        },
+        value: "",
+      },
+      zipCode: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Zip Code",
+        },
+        value: "",
+      },
+      country: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Country",
+        },
+        value: "",
+      },
+      email: {
+        elementType: "input",
+        elementConfig: {
+          type: "email",
+          placeholder: "Your E-Mail",
+        },
+        value: "",
+      },
+      deliveryOptions: {
+        elementType: "select",
+        elementConfig: {
+          options: [
+            {
+              value: "fastest",
+              displayValue: "Fastest",
+            },
+            {
+              value: "cheapest",
+              displayValue: "Cheapest",
+            },
+          ],
+        },
+        value: "",
+      },
     },
     loading: false,
   };
@@ -53,12 +105,7 @@ class ContactData extends Component {
     let form = (
       <form>
         {/* todo implement later at a proper way */}
-        <Input
-          inputtype="input"
-          type="text"
-          name="name"
-          placeholder="Your Name"
-        />
+        <Input elementType="..." elementConfig=".." value=".." />
         <Input
           inputtype="input"
           type="email"
