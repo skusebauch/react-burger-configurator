@@ -74,20 +74,17 @@ class ContactData extends Component {
     //console.log(this.props.ingredients);
     event.preventDefault();
     this.setState({ loading: true });
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm) {
+      formData[formElementIdentifier] = this.state.orderForm[
+        formElementIdentifier
+      ].value;
+    }
     const order = {
       ingredients: this.props.ingredients,
       // in real project re-calculate price at server side
       price: this.props.price,
-      customer: {
-        name: "Sven Kusebauch",
-        address: {
-          street: "Teststreet 1",
-          zipCode: "41324",
-          country: "Germany",
-        },
-        email: "test@test.com",
-      },
-      deliveryOptions: "fastest",
+      orderData: formData,
     };
     axios
       .post("/orders.json", order)
@@ -124,7 +121,7 @@ class ContactData extends Component {
     }
     // to add spinner after submitting order
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
@@ -135,9 +132,7 @@ class ContactData extends Component {
           />
         ))}
 
-        <Button btnType="Success" clicked={this.orderHandler}>
-          ORDER
-        </Button>
+        <Button btnType="Success">ORDER</Button>
       </form>
     );
     if (this.state.loading) {
