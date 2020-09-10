@@ -21,3 +21,8 @@
 .InputElement:focus {
   background-color: rgb(157, 157, 157);
 }
+
+.Invalid {
+  border: 1px solid red;
+  background-color: rgb(254, 186, 186);
+}
