@@ -15,6 +15,10 @@ class ContactData extends Component {
           placeholder: "Your Name",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       street: {
         elementType: "input",
@@ -23,6 +27,10 @@ class ContactData extends Component {
           placeholder: "Your Address",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       zipCode: {
         elementType: "input",
@@ -31,6 +39,12 @@ class ContactData extends Component {
           placeholder: "Your Zip Code",
         },
         value: "",
+        validation: {
+          required: true,
+          minLenght: 5,
+          maxLenght: 5,
+        },
+        valid: false,
       },
       country: {
         elementType: "input",
@@ -39,6 +53,10 @@ class ContactData extends Component {
           placeholder: "Your Country",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       email: {
         elementType: "input",
@@ -47,6 +65,10 @@ class ContactData extends Component {
           placeholder: "Your E-Mail",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       deliveryOptions: {
         elementType: "select",
@@ -97,6 +119,23 @@ class ContactData extends Component {
       });
   };
 
+  checkValidity(value, rules) {
+    let isValid = true;
+    if (rules.required) {
+      // trim to avoid positive validation with whitespace at the beginning
+      isValid = value.trim() !== "" && isValid;
+    }
+
+    if (rules.minLenght) {
+      isValid = value.length >= rules.minLenght && isValid;
+    }
+    if (rules.maxLenght) {
+      isValid = value.length <= rules.maxLenght && isValid;
+    }
+
+    return isValid;
+  }
+
   inputChangedHandler = (event, inputIdentifier) => {
     const updatedOrderForm = {
       ...this.state.orderForm,
@@ -106,6 +145,11 @@ class ContactData extends Component {
       ...updatedOrderForm[inputIdentifier],
     };
     updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
+    );
+    console.log(updatedFormElement);
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({ orderForm: updatedOrderForm });
   };
