@@ -18,6 +18,6 @@
   width: 100%;
 }
 
-.InputElement:focus  {
-  background-color: #ccc;
+.InputElement:focus {
+  background-color: rgb(157, 157, 157);
 }
