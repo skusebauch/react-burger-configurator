@@ -105,9 +105,6 @@ class ContactData extends Component {
   };
 
   orderHandler = (event) => {
-    ////just to debug to check whether we get ingredients
-    //event.preventDefault();
-    //console.log(this.props.ingredients);
     event.preventDefault();
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
