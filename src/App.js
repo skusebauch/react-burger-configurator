@@ -1,7 +1,6 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import asyncComponent from "./hoc/asyncComponent/asyncComponent";
 
 //import Checkout from "./containers/Checkout/Checkout"; lazyLoad
 //import Orders from "./containers/Orders/Orders"; lazyLoad
@@ -11,15 +10,15 @@ import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
 
-const asyncCheckout = asyncComponent(() => {
+const Checkout = React.lazy(() => {
   return import("./containers/Checkout/Checkout");
 });
 
-const asyncOrders = asyncComponent(() => {
+const Orders = React.lazy(() => {
   return import("./containers/Orders/Orders");
 });
 
-const asyncAuth = asyncComponent(() => {
+const Auth = React.lazy(() => {
   return import("./containers/Auth/Auth");
 });
 
@@ -30,7 +29,7 @@ const app = (props) => {
 
   let routes = (
     <Switch>
-      <Route path="/auth" component={asyncAuth} />
+      <Route path="/auth" render={() => <Auth />} />
       <Route path="/" exact component={BurgerBuilder} />
       {/*  everything unknown redirect to main page */}
       <Redirect to="/" />
@@ -40,10 +39,10 @@ const app = (props) => {
   if (props.isAuthenticated) {
     routes = (
       <Switch>
-        <Route path="/checkout" component={asyncCheckout} />
-        <Route path="/orders" component={asyncOrders} />
+        <Route path="/checkout" render={() => <Checkout />} />
+        <Route path="/orders" render={() => <Orders />} />
         <Route path="/Logout" component={Logout} />
-        <Route path="/auth" component={asyncAuth} />
+        <Route path="/auth" render={() => <Auth />} />
         <Route path="/" exact component={BurgerBuilder} />
         {/*  everything unknown redirect to main page */}
         <Redirect to="/" />
@@ -53,7 +52,9 @@ const app = (props) => {
 
   return (
     <div>
-      <Layout>{routes}</Layout>
+      <Layout>
+        <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+      </Layout>
     </div>
   );
 };
